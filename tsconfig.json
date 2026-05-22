@@ -3,5 +3,15 @@
   "compilerOptions": {
     "baseUrl": ".",
     "ignoreDeprecations": "6.0"
-  }
+  },
+  "include": [
+    "src",
+    "docusaurus.config.ts",
+    "sidebars.ts"
+  ],
+  "exclude": [
+    "build",
+    ".docusaurus",
+    "node_modules"
+  ]
 }

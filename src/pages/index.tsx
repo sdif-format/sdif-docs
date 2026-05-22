@@ -67,11 +67,18 @@ const ECOSYSTEM = [
 // ---------------------------------------------------------------------------
 
 function HeroSection(): React.JSX.Element {
-  const { siteConfig } = useDocusaurusContext();
+  const wordmarkSrc = useBaseUrl('/img/sdif-logo-t.png');
 
   return (
     <section className={styles.hero}>
       <div className={styles.heroInner}>
+        <img
+          className={styles.heroWordmark}
+          src={wordmarkSrc}
+          alt="SDIF"
+          width={420}
+          height={164}
+        />
         <h1 className={styles.heroTitle}>
           SDIF &mdash; Semantic Data Interchange Format
         </h1>

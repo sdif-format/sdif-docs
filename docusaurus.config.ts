@@ -11,7 +11,11 @@ const config: Config = {
   organizationName: 'sdif-format',
   projectName: 'sdif-docs',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -37,7 +41,7 @@ const config: Config = {
       title: 'SDIF',
       logo: {
         alt: 'SDIF Logo',
-        src: 'img/sdif-symbol-logo.png',
+        src: 'img/sdif-logo-t.png',
       },
       items: [
         {to: '/docs/why-sdif', label: 'Why SDIF?', position: 'left'},

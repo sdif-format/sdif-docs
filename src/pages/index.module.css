@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #07090c;
+  background: linear-gradient(180deg, #07090c 0%, #091016 72%, #0d1117 100%);
   color: #e2e8e5;
 }
 
@@ -43,7 +43,7 @@
 }
 
 [data-theme='light'] .hero {
-  background: #0d1f1c;
+  background: linear-gradient(180deg, #0d1f1c 0%, #102620 72%, #e6edeb 100%);
   color: #e2e8e5;
 }
 
@@ -287,15 +287,30 @@
    Shared section shell
    ------------------------------------------------------------ */
 .section {
+  position: relative;
+  overflow: hidden;
   padding: 5rem 2rem;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 212, 184, 0.045), transparent 32rem),
+    linear-gradient(180deg, #111820 0%, #0d1117 100%);
 }
 
 .sectionAlt {
-  background: var(--sdif-surface-alt, #111820);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(54, 99, 255, 0.045), transparent 34rem),
+    linear-gradient(180deg, #0d1117 0%, #111820 100%);
+}
+
+[data-theme='light'] .section {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(0, 107, 96, 0.055), transparent 32rem),
+    linear-gradient(180deg, #f1f5f3 0%, #e6edeb 100%);
 }
 
 [data-theme='light'] .sectionAlt {
-  background: #e6edeb;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(54, 99, 255, 0.045), transparent 34rem),
+    linear-gradient(180deg, #e6edeb 0%, #f1f5f3 100%);
 }
 
 .container {

@@ -151,6 +151,74 @@
   cursor: pointer;
 }
 
+
+.heroLlmCard {
+  width: min(680px, 100%);
+  margin-top: 1.5rem;
+  padding: 0.9rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid rgba(0, 224, 216, 0.16);
+  border-left: 3px solid #00d4b8;
+  border-radius: 4px;
+  background: linear-gradient(135deg, rgba(0, 224, 216, 0.08), rgba(54, 99, 255, 0.05)),
+    rgba(5, 15, 24, 0.52);
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(10px);
+}
+
+@media (max-width: 680px) {
+  .heroLlmCard {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+.heroLlmCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  text-align: left;
+}
+
+.heroLlmLabel {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #00d4b8;
+}
+
+.heroLlmText {
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: rgba(226, 232, 229, 0.78);
+}
+
+.heroLlmLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.heroLlmLinks a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #00d4b8;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.heroLlmLinks a:hover {
+  color: #1ae8d2;
+  text-decoration: underline;
+}
+
 .heroBtnPrimary {
   background: #00d4b8;
   color: #050c0a;
@@ -496,55 +564,4 @@
   line-height: 1.6;
   color: var(--ifm-font-color-secondary, #7a8e8c);
   margin: 0;
-}
-
-/* ------------------------------------------------------------
-   LLM section
-   ------------------------------------------------------------ */
-.llmPanel {
-  background: var(--sdif-surface, #0d1117);
-  border: 1px solid var(--sdif-border, rgba(0, 212, 184, 0.1));
-  border-radius: 4px;
-  padding: 2rem 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  max-width: 720px;
-}
-
-@media (max-width: 600px) {
-  .llmPanel {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-}
-
-[data-theme='light'] .llmPanel {
-  background: #f4f8f7;
-  border-color: rgba(0, 107, 96, 0.12);
-}
-
-.llmEntry {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.llmPath {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--sdif-teal, #00d4b8);
-  text-decoration: none;
-}
-
-.llmPath:hover {
-  color: var(--sdif-teal-bright, #1ae8d2);
-  text-decoration: underline;
-}
-
-.llmPathDesc {
-  font-size: 0.85rem;
-  color: var(--ifm-font-color-secondary, #7a8e8c);
-  line-height: 1.55;
 }

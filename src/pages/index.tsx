@@ -72,6 +72,8 @@ function TerminalWindow({ filename, children }: TerminalWindowProps): React.JSX.
 
 function HeroSection(): React.JSX.Element {
   const wordmarkSrc = useBaseUrl('/img/sdif-wordmark-dark.png');
+  const llmsTxt = useBaseUrl('/llms.txt');
+  const llmsFullTxt = useBaseUrl('/llms-full.txt');
 
   return (
     <section className={styles.hero}>
@@ -109,6 +111,17 @@ function HeroSection(): React.JSX.Element {
           >
             github ↗
           </a>
+        </div>
+
+        <div className={styles.heroLlmCard}>
+          <div className={styles.heroLlmCopy}>
+            <span className={styles.heroLlmLabel}>for agents &amp; llms</span>
+            <span className={styles.heroLlmText}>Share these with your LLM before working with SDIF.</span>
+          </div>
+          <div className={styles.heroLlmLinks}>
+            <a href={llmsTxt} target="_blank" rel="noopener noreferrer">/llms.txt</a>
+            <a href={llmsFullTxt} target="_blank" rel="noopener noreferrer">/llms-full.txt</a>
+          </div>
         </div>
       </div>
 
@@ -227,46 +240,6 @@ function EcosystemSection(): React.JSX.Element {
 }
 
 // ---------------------------------------------------------------------------
-// LLM / Agent docs
-// ---------------------------------------------------------------------------
-
-function LlmSection(): React.JSX.Element {
-  const llmsTxt = useBaseUrl('/llms.txt');
-  const llmsFullTxt = useBaseUrl('/llms-full.txt');
-
-  return (
-    <section className={styles.section}>
-      <div className={styles.container}>
-        <div className={styles.sectionLabel}>for agents &amp; llms</div>
-        <h2 className={styles.sectionTitle}>Machine-readable docs</h2>
-        <p className={styles.sectionSub}>
-          SDIF ships compact, agent-ready documentation alongside the human docs.
-        </p>
-
-        <div className={styles.llmPanel}>
-          <div className={styles.llmEntry}>
-            <a className={styles.llmPath} href={llmsTxt} target="_blank" rel="noopener noreferrer">
-              /llms.txt
-            </a>
-            <span className={styles.llmPathDesc}>
-              Compact project overview — format version, purpose, CLI commands, rules for assistants.
-            </span>
-          </div>
-          <div className={styles.llmEntry}>
-            <a className={styles.llmPath} href={llmsFullTxt} target="_blank" rel="noopener noreferrer">
-              /llms-full.txt
-            </a>
-            <span className={styles.llmPathDesc}>
-              Complete documentation bundle — syntax, canonicalization, examples, spec links, limitations.
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// ---------------------------------------------------------------------------
 // Page root
 // ---------------------------------------------------------------------------
 
@@ -281,7 +254,6 @@ export default function Home(): React.JSX.Element {
       <ComparisonSection />
       <FeaturesSection />
       <EcosystemSection />
-      <LlmSection />
     </Layout>
   );
 }

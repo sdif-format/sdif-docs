@@ -1,0 +1,257 @@
+/* =========================================================================
+   SDIF home page styles — scoped via CSS Modules
+   ========================================================================= */
+
+/* ---------------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------------- */
+.hero {
+  background: linear-gradient(
+    160deg,
+    var(--ifm-color-primary-darkest) 0%,
+    #0d2630 60%,
+    #0a1a1f 100%
+  );
+  color: #fff;
+  padding: 5rem 1.5rem 4rem;
+  text-align: center;
+}
+
+[data-theme='dark'] .hero {
+  background: linear-gradient(
+    160deg,
+    #0a2028 0%,
+    #0d1f28 60%,
+    #0b1419 100%
+  );
+}
+
+.heroInner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+.heroSubtitle {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(255, 255, 255, 0.78);
+  margin-bottom: 2.5rem;
+  line-height: 1.65;
+}
+
+.heroButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.heroBtn {
+  min-width: 140px;
+}
+
+/* ---------------------------------------------------------------------------
+   Shared section chrome
+   --------------------------------------------------------------------------- */
+.section {
+  padding: 4rem 1.5rem;
+}
+
+.sectionAlt {
+  background: var(--ifm-color-emphasis-100);
+}
+
+[data-theme='dark'] .sectionAlt {
+  background: var(--ifm-background-surface-color, #161b22);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---------------------------------------------------------------------------
+   Code comparison
+   --------------------------------------------------------------------------- */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .comparison {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparisonPane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.comparisonLabel {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ifm-color-primary);
+  padding-left: 0.25rem;
+}
+
+.codeBlock {
+  flex: 1;
+  margin: 0;
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  background: var(--ifm-color-emphasis-200);
+  padding: 1.25rem 1rem;
+  overflow-x: auto;
+}
+
+[data-theme='dark'] .codeBlock {
+  background: #0d1117;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.comparisonCaption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-top: 0.5rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Feature cards (8-up grid)
+   --------------------------------------------------------------------------- */
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.featureCard {
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.5rem 1.25rem;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.featureCard:hover {
+  box-shadow: 0 4px 16px rgba(0, 180, 160, 0.12);
+  border-color: var(--ifm-color-primary-light);
+}
+
+[data-theme='dark'] .featureCard {
+  background: #161b22;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .featureCard:hover {
+  border-color: var(--ifm-color-primary);
+}
+
+.featureCardTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--ifm-color-primary-dark);
+}
+
+[data-theme='dark'] .featureCardTitle {
+  color: var(--ifm-color-primary-light);
+}
+
+.featureCardBody {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-800);
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Ecosystem cards (3-up grid)
+   --------------------------------------------------------------------------- */
+.ecosystemGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.ecosystemCard {
+  display: block;
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 8px;
+  padding: 1.75rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.ecosystemCard:hover {
+  box-shadow: 0 6px 20px rgba(0, 180, 160, 0.15);
+  border-color: var(--ifm-color-primary);
+  text-decoration: none;
+  color: inherit;
+}
+
+[data-theme='dark'] .ecosystemCard {
+  background: #161b22;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.ecosystemCardName {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: var(--ifm-color-primary);
+}
+
+.ecosystemCardDesc {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--ifm-color-emphasis-800);
+  margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   LLM / agent section
+   --------------------------------------------------------------------------- */
+.llmBlock {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.llmBlock p {
+  margin-bottom: 0.6rem;
+}
+
+.llmBlock a {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95em;
+}

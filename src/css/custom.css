@@ -1,0 +1,82 @@
+/**
+ * SDIF brand palette — overrides for Docusaurus 3.x
+ * Primary: teal-green #00B4A0 (semantic/data feel)
+ * Dark-mode friendly; minimal overrides only.
+ */
+
+/* ------------------------------------------------------------------
+   Color ramp — light mode
+   ------------------------------------------------------------------ */
+:root {
+  --ifm-color-primary: #00b4a0;
+  --ifm-color-primary-dark: #00a290;
+  --ifm-color-primary-darker: #009988;
+  --ifm-color-primary-darkest: #007d70;
+  --ifm-color-primary-light: #00c6b0;
+  --ifm-color-primary-lighter: #00ceb8;
+  --ifm-color-primary-lightest: #1ae8d2;
+
+  --ifm-code-font-size: 90%;
+  --ifm-font-family-monospace: 'JetBrains Mono', 'Fira Code', 'Cascadia Code',
+    ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+
+  --docusaurus-highlighted-code-line-bg: rgba(0, 180, 160, 0.12);
+
+  /* Slightly tighter heading weights */
+  --ifm-heading-font-weight: 600;
+}
+
+/* ------------------------------------------------------------------
+   Color ramp — dark mode
+   ------------------------------------------------------------------ */
+[data-theme='dark'] {
+  --ifm-color-primary: #1ae8d2;
+  --ifm-color-primary-dark: #00d4be;
+  --ifm-color-primary-darker: #00c9b3;
+  --ifm-color-primary-darkest: #00a590;
+  --ifm-color-primary-light: #33edd8;
+  --ifm-color-primary-lighter: #4df0dc;
+  --ifm-color-primary-lightest: #80f5e8;
+
+  --ifm-background-color: #0f1117;
+  --ifm-background-surface-color: #161b22;
+  --ifm-navbar-background-color: #0f1117;
+  --ifm-footer-background-color: #0b0e13;
+
+  --docusaurus-highlighted-code-line-bg: rgba(26, 232, 210, 0.10);
+}
+
+/* ------------------------------------------------------------------
+   Code blocks — sharp, technical look
+   ------------------------------------------------------------------ */
+code {
+  border-radius: 3px;
+  padding: 0.1em 0.3em;
+}
+
+pre {
+  border-radius: 6px;
+}
+
+pre code {
+  padding: 0;
+}
+
+/* ------------------------------------------------------------------
+   Navbar
+   ------------------------------------------------------------------ */
+.navbar {
+  border-bottom: 1px solid rgba(0, 180, 160, 0.15);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom-color: rgba(26, 232, 210, 0.12);
+}
+
+/* ------------------------------------------------------------------
+   Footer
+   ------------------------------------------------------------------ */
+.footer {
+  border-top: 1px solid rgba(0, 180, 160, 0.10);
+}

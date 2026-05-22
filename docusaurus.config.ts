@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'SDIF',
   tagline: 'Compact, semantic, canonicalizable data for AI agents and deterministic machine workflows.',
-  favicon: 'img/sdif-symbol.svg',
+  favicon: 'img/sdif-symbol-logo.png',
   url: 'https://sdif-format.github.io',
   baseUrl: '/sdif-docs/',
   organizationName: 'sdif-format',
@@ -37,7 +37,7 @@ const config: Config = {
       title: 'SDIF',
       logo: {
         alt: 'SDIF Logo',
-        src: 'img/sdif-symbol.svg',
+        src: 'img/sdif-symbol-logo.png',
       },
       items: [
         {to: '/docs/why-sdif', label: 'Why SDIF?', position: 'left'},

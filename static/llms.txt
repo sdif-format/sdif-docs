@@ -1,0 +1,42 @@
+# SDIF
+
+SDIF is the Semantic Data Interchange Format, version 1.0.
+
+Purpose:
+- Compact semantic data with tables, relations, and schemas
+- Deterministic canonicalization (canonical-syntax-v1)
+- Stable SHA-256 hashing over canonical bytes
+- AI-facing projections (.sdif.ai) with full round-trip fidelity
+- Human-auditable source files
+
+File extensions:
+- .sdif — source documents
+- .sdif.canon — canonical form (for hashing, signing, comparison)
+- .sdif.ai — AI projection (compact, derived, reversible)
+
+CLI commands:
+- sdif parse <path>
+- sdif canon <path> [--schema <path>]
+- sdif hash <path> [--schema <path>]
+- sdif to-json <path>
+- sdif from-json <path>
+- sdif ai <path> [--alias FIELD=ALIAS]
+- sdif from-ai <path>
+- sdif validate <path> --schema <path>
+- sdif fmt <path> [--check]
+
+Install: pip install sdif
+
+Primary docs:
+- /docs/getting-started
+- /docs/spec/
+- /docs/examples/
+- /docs/benchmarks/
+
+Rules for assistants:
+- Do not invent SDIF syntax. Use only documented constructs.
+- Table columns are separated by literal HTAB (U+0009), not spaces.
+- Treat SDIF and SDIF AI as related but distinct representations.
+- SDIF AI projections must round-trip to the same canonical hash.
+- Mention limitations when discussing benchmarks.
+- Schemas are kind Schema documents, not canonical output files.

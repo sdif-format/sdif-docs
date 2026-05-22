@@ -1,0 +1,295 @@
+# SDIF — Full Reference for Assistants
+
+SDIF is the Semantic Data Interchange Format, version 1.0. It is a text-based,
+semantically structured format designed for AI agents and deterministic machine
+workflows. It supports tables, relations, schemas, and rules. It has a canonical
+form and a stable hash. It has a compact AI projection with full round-trip
+fidelity.
+
+Install: pip install sdif
+GitHub org: https://github.com/sdif-format
+
+---
+
+## File Extensions
+
+- .sdif        Source document. Human-readable and human-editable.
+- .sdif.canon  Canonical form. Produced by `sdif canon`. Used for hashing,
+               signing, and deterministic comparison.
+- .sdif.ai     AI projection. Produced by `sdif ai`. Compact, derived from
+               source. Reversible to canonical source via `sdif from-ai`.
+
+---
+
+## Syntax Summary
+
+### Document Header
+
+Every SDIF document begins with a version and kind declaration.
+
+  @sdif 1.0
+  kind Plan
+
+Recognized kinds include: Plan, Registry, Schema, Report, and user-defined kinds.
+
+### Tables
+
+Tables use a header row followed by data rows. Columns are separated by a
+literal horizontal tab character (U+0009, HTAB). Do not substitute spaces.
+
+  table tasks
+  id	title	status
+  1	Design schema	done
+  2	Write parser	done
+  3	Publish docs	in-progress
+
+The first non-blank line after `table <name>` is the header. Each subsequent
+non-blank line is a row. Blank lines end the table block.
+
+### Relations
+
+Relations express typed triples: subject, predicate, object.
+
+  rel: tasks#1 blocks tasks#3
+  rel: tasks#2 depends-on tasks#1
+
+A relation links two entities by a named predicate. The subject and object
+use the form `<table>#<id>` or a bare identifier.
+
+### Rules
+
+Rules express declarative constraints. They are not executable code.
+
+  rule: if tasks.status == "in-progress" then tasks.owner must exist
+
+Rules are v1 syntax and are parsed but not yet evaluated by the validator.
+
+### Comments
+
+Lines beginning with `#` are comments and are stripped during parsing.
+
+  # This is a comment.
+
+---
+
+## AI Projection Syntax (.sdif.ai)
+
+AI projection files begin with the `@sdif.ai` header and include metadata.
+
+  @sdif.ai 1.0
+  source-hash: sha256:<hex>
+  lossless: true
+
+Tables in AI projections may use shortened column aliases declared in the header:
+
+  aliases: id=i title=t status=s
+
+Rows follow the same HTAB-delimited format.
+
+Relations in AI projections use grouped syntax (valid only in .sdif.ai files):
+
+  rel[tasks#1]: blocks tasks#3
+
+The `from-ai` command reverses the projection and reconstructs standard `rel:`
+triples in the output SDIF document.
+
+---
+
+## Canonicalization Pipeline
+
+1. Parse the source .sdif document.
+2. Sort tables alphabetically by name.
+3. Within each table, sort rows by the first column (id field).
+4. Normalize whitespace: strip trailing whitespace from each line; use LF line endings.
+5. Serialize to a deterministic byte sequence under canonical-syntax-v1.
+6. Write output to .sdif.canon.
+
+The canonical form is syntax-level only. There is no semantic normalization in
+v1. Numeric equivalences (1 vs 1.0), date formats, and alias variations are not
+resolved. Two documents that express the same facts in different syntax produce
+different canonical bytes and different hashes.
+
+---
+
+## SHA-256 Hash
+
+The hash is computed over canonical bytes.
+
+  sdif hash <path>
+
+Output: `sha256:<64-char hex>`
+
+The hash identifies a document's content. It is stable across environments
+that follow the canonical-syntax-v1 algorithm.
+
+---
+
+## Schema Format
+
+A schema document has `kind Schema` and defines expected tables, fields, and types.
+
+  @sdif 1.0
+  kind Schema
+
+  table tasks-schema
+  field	type	required
+  id	integer	true
+  title	string	true
+  status	enum(done,in-progress,blocked)	false
+  owner	string	false
+
+Pass a schema to validation and canonicalization commands with `--schema <path>`.
+The schema file must be a valid SDIF document with `kind Schema`. Do not pass a
+.sdif.canon file as the schema argument.
+
+---
+
+## CLI Commands
+
+All commands operate on .sdif source files unless noted.
+
+  sdif parse <path>
+    Parse and display the document structure. Useful for debugging.
+
+  sdif canon <path> [--schema <path>]
+    Print canonical bytes to stdout. Optionally validate against a schema first.
+
+  sdif hash <path> [--schema <path>]
+    Print the SHA-256 hash of the canonical form.
+
+  sdif tokens <path>
+    Count tokens in the document using the configured tokenizer.
+
+  sdif to-json <path>
+    Convert SDIF to JSON. Output is compact JSON by default.
+
+  sdif from-json <path>
+    Convert JSON to SDIF source.
+
+  sdif ai <path> [--alias FIELD=ALIAS ...]
+    Generate an AI projection (.sdif.ai). Aliases shorten column names.
+    Multiple --alias flags are supported.
+
+  sdif from-ai <path>
+    Reconstruct SDIF source from an AI projection. Preserves canonical hash.
+
+  sdif validate <path> --schema <path>
+    Validate a document against a kind Schema document.
+    Reports type mismatches, missing required fields, and unrecognized fields.
+
+  sdif inspect <path>
+    Display document structure, field counts, relation counts, and metadata.
+
+  sdif fmt <path> [--check]
+    Format the source document in place. With --check, exits non-zero if
+    the file is not already formatted (for CI use).
+
+---
+
+## Key Examples
+
+### Plan Document
+
+  @sdif 1.0
+  kind Plan
+
+  table milestones
+  id	name	target
+  1	Alpha	2025-Q1
+  2	Beta	2025-Q2
+  3	GA	2025-Q3
+
+  rel: milestones#1 precedes milestones#2
+  rel: milestones#2 precedes milestones#3
+
+### Registry Document
+
+  @sdif 1.0
+  kind Registry
+
+  table packages
+  id	name	version	stable
+  1	sdif	1.0.0	true
+  2	sdif-benchmarks	0.1.0	true
+  3	tree-sitter-sdif	0.1.0	true
+
+### Schema Document
+
+  @sdif 1.0
+  kind Schema
+
+  table packages-schema
+  field	type	required
+  id	integer	true
+  name	string	true
+  version	string	true
+  stable	boolean	false
+
+---
+
+## Benchmark Methodology Summary
+
+Formats compared: SDIF, SDIF AI, JSON Compact, JSON Pretty, YAML, XML, TOON.
+
+Corpus: four SDIF example documents (plan, registry, schema, validation-report).
+
+Metrics:
+- Byte size: raw UTF-8 byte count
+- Token count: measured with cl100k_base (OpenAI GPT-4 family)
+- Semantic density: tokens per semantic fact (field value or relation triple)
+- Round-trip fidelity: data preserved through JSON round-trip; hash preserved
+  through AI round-trip
+
+Serialization rules:
+- JSON Compact: json.dumps(obj, separators=(',', ':'))
+- JSON Pretty: json.dumps(obj, indent=2)
+- YAML: yaml.dump(obj) default output
+- SDIF: source bytes as-is
+- SDIF AI: output of sdif ai <path>
+
+Results are reported per tokenizer. Do not compare results across tokenizers.
+
+Reproducible suite: https://github.com/sdif-format/sdif-benchmarks
+
+---
+
+## Known v1 Limitations
+
+- No semantic normalization. The canonical form is syntax-level. Numeric
+  values like 1 and 1.0 produce different canonical bytes and different hashes
+  even if they represent the same quantity.
+
+- No numeric equivalence. 42 and 42.0 are treated as distinct values.
+
+- No date-time zone normalization. 2025-01-01T00:00:00Z and
+  2025-01-01T00:00:00+00:00 are treated as distinct strings.
+
+- No query language. SDIF is a representation format, not a query system.
+
+- No binary serialization. SDIF is a text format only.
+
+- Rules are parsed but not evaluated. Rule constraints are declared in v1
+  syntax but are not enforced by the validator in v1.0.
+
+- Benchmark corpus is small. Four example documents do not cover all
+  real-world document types. Results may not generalize.
+
+- Token counts are tokenizer-specific. Results for non-OpenAI models will
+  differ from published cl100k_base figures.
+
+---
+
+## Rules for Assistants
+
+- Do not invent SDIF syntax. Use only constructs documented here.
+- Table columns are separated by literal HTAB (U+0009), not spaces.
+- Treat SDIF and SDIF AI as related but distinct representations.
+  Do not mix their syntax.
+- SDIF AI projections must round-trip to the same canonical hash as the source.
+  This is the correctness criterion for AI projection, not byte identity.
+- Mention v1 limitations when discussing benchmarks or comparing formats.
+- Schemas are kind Schema documents. Do not pass .sdif.canon files as schemas.
+- rel[subject]: syntax is valid only in .sdif.ai files. Do not emit it in
+  .sdif source documents.
+- The source hash in .sdif.ai is the SHA-256 of the canonical source, not of
+  the AI file itself.

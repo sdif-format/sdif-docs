@@ -71,18 +71,20 @@ function TerminalWindow({ filename, children }: TerminalWindowProps): React.JSX.
 // ---------------------------------------------------------------------------
 
 function HeroSection(): React.JSX.Element {
-  const wordmarkSrc = useBaseUrl('/img/sdif-logo-t.png');
+  const wordmarkSrc = useBaseUrl('/img/sdif-wordmark-dark.png');
 
   return (
     <section className={styles.hero}>
       <div className={styles.heroInner}>
-        <img
-          className={styles.heroWordmark}
-          src={wordmarkSrc}
-          alt="SDIF"
-          width={380}
-          height={148}
-        />
+        <div className={styles.heroLogoWrap}>
+          <img
+            className={styles.heroWordmark}
+            src={wordmarkSrc}
+            alt="SDIF"
+            width={380}
+            height={148}
+          />
+        </div>
         <p className={styles.heroTagline}>
           Compact, semantic, canonicalizable data for <em>AI agents</em>
           <br />

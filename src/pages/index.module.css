@@ -60,12 +60,42 @@
   gap: 0;
 }
 
-.heroWordmark {
-  display: block;
-  width: min(380px, 76vw);
-  height: auto;
+.heroLogoWrap {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 2.5rem;
-  filter: drop-shadow(0 0 32px rgba(0, 212, 184, 0.35));
+}
+
+.heroLogoWrap::before {
+  content: '';
+  position: absolute;
+  inset: -42px;
+  z-index: -1;
+  background: radial-gradient(
+    circle,
+    rgba(0, 224, 216, 0.22) 0%,
+    rgba(54, 99, 255, 0.16) 38%,
+    transparent 72%
+  );
+  filter: blur(22px);
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.heroWordmark {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: clamp(280px, 35vw, 440px);
+  height: auto;
+  opacity: 1;
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.32))
+    drop-shadow(0 0 12px rgba(0, 224, 216, 0.18))
+    drop-shadow(0 0 36px rgba(54, 99, 255, 0.16));
 }
 
 .heroTagline {

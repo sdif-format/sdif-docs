@@ -40,7 +40,8 @@ const config: Config = {
     navbar: {
       logo: {
         alt: 'SDIF Logo',
-        src: 'img/sdif-logo-t.png',
+        src: 'img/sdif-logo.png',
+        srcDark: 'img/sdif-wordmark-dark.png',
       },
       items: [
         {to: '/docs/why-sdif', label: 'Why SDIF?', position: 'left'},

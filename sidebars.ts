@@ -1,0 +1,109 @@
+import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+
+const sidebars: SidebarsConfig = {
+  docs: [
+    'intro',
+    'getting-started',
+    'why-sdif',
+    {
+      type: 'category',
+      label: 'Concepts',
+      items: [
+        'concepts/overview',
+        'concepts/documents',
+        'concepts/headers',
+        'concepts/fields',
+        'concepts/tables',
+        'concepts/relations',
+        'concepts/schemas',
+        'concepts/validation',
+        'concepts/canonicalization',
+        'concepts/hashing',
+        'concepts/sdif-ai',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Guides',
+      items: [
+        'guides/install',
+        'guides/cli',
+        'guides/json-to-sdif',
+        'guides/sdif-to-json',
+        'guides/canonicalize-a-document',
+        'guides/validate-with-schema',
+        'guides/create-sdif-ai-projection',
+        'guides/benchmark-your-data',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Examples',
+      items: [
+        'examples/plan',
+        'examples/registry',
+        'examples/schema',
+        'examples/validation-report',
+        'examples/benchmark-summary',
+        'examples/ai-context',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Specification',
+      link: {type: 'doc', id: 'spec/index'},
+      items: [
+        'spec/lexical-structure',
+        'spec/directives',
+        'spec/document-model',
+        'spec/scalar-values',
+        'spec/tables',
+        'spec/relations',
+        'spec/schemas',
+        'spec/canonicalization',
+        'spec/sdif-ai',
+        'spec/conformance',
+        'spec/security',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Benchmarks',
+      link: {type: 'doc', id: 'benchmarks/index'},
+      items: [
+        'benchmarks/methodology',
+        'benchmarks/token-efficiency',
+        'benchmarks/semantic-density',
+        'benchmarks/roundtrip-fidelity',
+        'benchmarks/sdif-vs-json',
+        'benchmarks/sdif-vs-yaml',
+        'benchmarks/sdif-vs-toon',
+        'benchmarks/reproduce',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Ecosystem',
+      link: {type: 'doc', id: 'ecosystem/index'},
+      items: [
+        'ecosystem/sdif-core',
+        'ecosystem/sdif-benchmarks',
+        'ecosystem/tree-sitter-sdif',
+        'ecosystem/editor-support',
+        'ecosystem/roadmap',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Contributing',
+      items: [
+        'contributing/index',
+        'contributing/implementation-guide',
+        'contributing/conformance-suite',
+        'contributing/release-process',
+      ],
+    },
+  ],
+};
+
+export default sidebars;

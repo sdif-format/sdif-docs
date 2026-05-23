@@ -71,6 +71,7 @@ const sidebars: SidebarsConfig = {
       label: 'Benchmarks',
       link: {type: 'doc', id: 'benchmarks/index'},
       items: [
+        'benchmarks/efficiency-formalization',
         'benchmarks/methodology',
         'benchmarks/token-efficiency',
         'benchmarks/semantic-density',

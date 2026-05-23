@@ -135,6 +135,16 @@ The three-case policy in Rule 11 requires clarification on error handling:
 - **`ordered: false` + `primary_key`**: The canonicalizer MUST sort rows by the primary key column using UTF-8 lexicographic ordering. Numeric-looking values are treated as strings (no numeric normalization in v1).
 - **`ordered: false` + no `primary_key`**: This is an error state. The canonicalizer MUST report a canonicalization error with the table name and the reason (`ordered=false requires primary_key for canonical ordering`). Partial canonical output MUST NOT be emitted for an erroring document.
 
+## List Literal Preservation
+
+:::note[Unreleased — fixed in next release]
+Prior to this fix, `_quote_if_needed` in the reference implementation re-quoted list literals that contained a comma or inner double-quote (e.g. `[a,b,c]`, `["alpha","beta"]`), converting them from list literals into quoted strings. After `canon → parse`, the value became a string instead of a list — a semantic change, not normalization.
+
+**Normative correction:** A list literal value (any value whose first character is `[` and last character is `]`) MUST be emitted as-is by the canonical serializer. The canonical serializer MUST NOT re-quote a list literal. `canon(parse(x)) = parse(x)` for list literal values must hold.
+
+The affected `plan` golden fixture has been regenerated. If you implement the reference canonicalizer, update `_quote_if_needed` to short-circuit before the safe-identifier check for any `[…]`-shaped value.
+:::
+
 ## Non-Goals for v1
 
 The following transformations are explicitly **out of scope** for `canonical-syntax-v1`. Implementations MUST NOT perform these transformations as part of canonicalization:

@@ -72,6 +72,10 @@ This means two source files with the same unordered table rows but written in di
 
 The rules above are versioned under the contract identifier `canonical-syntax-v1`. Future versions of SDIF may introduce `canonical-syntax-v2` with updated rules. Documents declare which contract their canonical form targets via the `@profile canonical` directive.
 
+:::note[Unreleased — fixed in next release]
+**List literal preservation.** Canonicalization must not convert list literals into quoted strings. A value like `[a,b,c]` or `["alpha","beta"]` is a list in SDIF; after `canonicalize → parse` it must still be a list. A bug in the reference canonicalizer was causing such values to be re-quoted, turning them into strings. This is corrected in the next release; the `plan` canonical fixture has been regenerated accordingly.
+:::
+
 ## What Canonicalization Does Not Do
 
 Version 1 canonicalization is **syntax-level only**. It does not perform semantic normalization. Specifically:

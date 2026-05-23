@@ -1,76 +1,79 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 
 /* ============================================================
-   SDIF Design System — Precision Terminal
-   Primary brand: Electric Teal #00D4B8
-   Typography: IBM Plex Mono (display) + IBM Plex Sans (body)
+   SDIF Design System — Cobalt / Deep Navy
+   Extracted from logo: #5B8FFF → #2255D0 gradient · #1B2840 charcoal
+   Typography: Sora (display + body) · JetBrains Mono (code)
    ============================================================ */
 
 /* ------------------------------------------------------------
-   Design tokens
+   Tokens — light mode
    ------------------------------------------------------------ */
 :root {
-  --sdif-teal:          #00a090;
-  --sdif-teal-bright:   #00d4b8;
-  --sdif-teal-glow:     rgba(0, 212, 184, 0.15);
-  --sdif-teal-border:   rgba(0, 212, 184, 0.18);
+  --sdif-cobalt:          #2255D0;
+  --sdif-cobalt-bright:   #3D72F5;
+  --sdif-cobalt-light:    #5B8FFF;
+  --sdif-cobalt-glow:     rgba(61, 114, 245, 0.14);
+  --sdif-cobalt-border:   rgba(61, 114, 245, 0.22);
+  --sdif-navy:            #1B2840;
+  --sdif-bluegrey:        #7B8FA8;
 
-  /* Docusaurus primary ramp — light mode */
-  --ifm-color-primary:          #006b60;
-  --ifm-color-primary-dark:     #005e55;
-  --ifm-color-primary-darker:   #005950;
-  --ifm-color-primary-darkest:  #004a41;
-  --ifm-color-primary-light:    #00786b;
-  --ifm-color-primary-lighter:  #007d70;
-  --ifm-color-primary-lightest: #009a8a;
+  --ifm-color-primary:          #2255D0;
+  --ifm-color-primary-dark:     #1E4DC0;
+  --ifm-color-primary-darker:   #1B48B5;
+  --ifm-color-primary-darkest:  #143895;
+  --ifm-color-primary-light:    #2B60DC;
+  --ifm-color-primary-lighter:  #3169E4;
+  --ifm-color-primary-lightest: #4F80F0;
 
-  /* Typography */
-  --ifm-font-family-base: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --ifm-font-family-monospace: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
-  --sdif-font-display: 'IBM Plex Mono', ui-monospace, monospace;
+  --ifm-font-family-base:      'Sora', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, monospace;
+  --sdif-font-display:         'Sora', sans-serif;
 
-  --ifm-heading-font-weight: 600;
-  --ifm-code-font-size: 88%;
-  --ifm-line-height-base: 1.65;
+  --ifm-heading-font-weight: 700;
+  --ifm-code-font-size:      87%;
+  --ifm-line-height-base:    1.68;
 
-  /* Light mode surfaces */
-  --sdif-surface:       #F1F5F3;
-  --sdif-surface-alt:   #E6EDEB;
-  --sdif-border:        rgba(0, 107, 96, 0.12);
+  --sdif-surface:     #F2F5FF;
+  --sdif-surface-alt: #E8EDFF;
+  --sdif-border:      rgba(34, 85, 208, 0.14);
 
-  --docusaurus-highlighted-code-line-bg: rgba(0, 180, 160, 0.12);
+  --docusaurus-highlighted-code-line-bg: rgba(61, 114, 245, 0.10);
 }
 
 /* ------------------------------------------------------------
-   Dark mode tokens
+   Tokens — dark mode
    ------------------------------------------------------------ */
 [data-theme='dark'] {
-  --sdif-teal:          #00d4b8;
-  --sdif-teal-bright:   #1ae8d2;
-  --sdif-teal-glow:     rgba(0, 212, 184, 0.12);
-  --sdif-teal-border:   rgba(0, 212, 184, 0.14);
+  --sdif-cobalt:          #3D72F5;
+  --sdif-cobalt-bright:   #5B8FFF;
+  --sdif-cobalt-light:    #7FACFF;
+  --sdif-cobalt-glow:     rgba(61, 114, 245, 0.16);
+  --sdif-cobalt-border:   rgba(91, 143, 255, 0.18);
+  --sdif-navy:            #1B2840;
+  --sdif-bluegrey:        #7B8FA8;
 
-  --ifm-color-primary:          #00d4b8;
-  --ifm-color-primary-dark:     #00bfa6;
-  --ifm-color-primary-darker:   #00b49d;
-  --ifm-color-primary-darkest:  #008f80;
-  --ifm-color-primary-light:    #1adbc2;
-  --ifm-color-primary-lighter:  #33dfca;
-  --ifm-color-primary-lightest: #66e9d8;
+  --ifm-color-primary:          #3D72F5;
+  --ifm-color-primary-dark:     #2A60F0;
+  --ifm-color-primary-darker:   #2257E8;
+  --ifm-color-primary-darkest:  #1A45CC;
+  --ifm-color-primary-light:    #5585FF;
+  --ifm-color-primary-lighter:  #6190FF;
+  --ifm-color-primary-lightest: #85AAFF;
 
-  --ifm-background-color:         #07090c;
-  --ifm-background-surface-color: #0d1117;
-  --ifm-navbar-background-color:  rgba(7, 9, 12, 0.88);
-  --ifm-footer-background-color:  #050709;
+  --ifm-background-color:          #07101C;
+  --ifm-background-surface-color:  #0B1628;
+  --ifm-navbar-background-color:   rgba(7, 16, 28, 0.92);
+  --ifm-footer-background-color:   #040C16;
 
-  --ifm-font-color-base:        #e2e8e5;
-  --ifm-font-color-secondary:   #7a8e8c;
+  --ifm-font-color-base:       #D8E4FF;
+  --ifm-font-color-secondary:  #7B8FA8;
 
-  --sdif-surface:       #0d1117;
-  --sdif-surface-alt:   #111820;
-  --sdif-border:        rgba(0, 212, 184, 0.1);
+  --sdif-surface:     #0B1628;
+  --sdif-surface-alt: #0F1E38;
+  --sdif-border:      rgba(91, 143, 255, 0.12);
 
-  --docusaurus-highlighted-code-line-bg: rgba(0, 212, 184, 0.10);
+  --docusaurus-highlighted-code-line-bg: rgba(61, 114, 245, 0.10);
 }
 
 /* ------------------------------------------------------------
@@ -78,19 +81,20 @@
    ------------------------------------------------------------ */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--sdif-font-display);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 /* ------------------------------------------------------------
    Code
    ------------------------------------------------------------ */
 code {
-  border-radius: 2px;
-  padding: 0.12em 0.36em;
+  border-radius: 4px;
+  padding: 0.12em 0.38em;
+  font-variant-ligatures: contextual;
 }
 
 pre {
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 pre code {
@@ -98,11 +102,11 @@ pre code {
 }
 
 /* ------------------------------------------------------------
-   Navbar — glass / minimal
+   Navbar
    ------------------------------------------------------------ */
 .navbar {
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--sdif-border);
   box-shadow: none;
 }
@@ -110,20 +114,42 @@ pre code {
 .navbar__title {
   font-family: var(--sdif-font-display);
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 .navbar__link {
-  font-size: 0.875rem;
+  font-family: var(--sdif-font-display);
+  font-size: 0.88rem;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
+  transition: color 0.15s;
+}
+
+.navbar__link--active,
+.navbar__link:hover {
+  color: var(--sdif-cobalt);
+}
+
+[data-theme='dark'] .navbar__link--active,
+[data-theme='dark'] .navbar__link:hover {
+  color: var(--sdif-cobalt-bright);
 }
 
 /* ------------------------------------------------------------
-   Sidebar doc headings use monospace
+   Sidebar
    ------------------------------------------------------------ */
 .menu__link {
   font-size: 0.875rem;
+  font-family: var(--sdif-font-display);
+}
+
+.menu__link--active {
+  color: var(--sdif-cobalt);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .menu__link--active {
+  color: var(--sdif-cobalt-bright);
 }
 
 /* ------------------------------------------------------------
@@ -133,50 +159,44 @@ pre code {
   position: relative;
   margin-top: 0;
   padding: 4rem 0 2.5rem;
-  border-top: 1px solid rgba(0, 212, 184, 0.22);
+  border-top: 1px solid var(--sdif-cobalt-border);
+}
+
+[data-theme='dark'] .footer {
   background:
-    radial-gradient(circle at 50% 0%, rgba(0, 212, 184, 0.10), transparent 36rem),
-    linear-gradient(180deg, #0a1015 0%, #050709 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    radial-gradient(ellipse at 50% 0%, rgba(61, 114, 245, 0.06), transparent 30rem),
+    linear-gradient(180deg, #09142A 0%, #040C16 100%);
 }
 
 [data-theme='light'] .footer {
-  border-top-color: rgba(0, 107, 96, 0.2);
   background:
-    radial-gradient(circle at 50% 0%, rgba(0, 107, 96, 0.10), transparent 34rem),
-    linear-gradient(180deg, #dce7e4 0%, #cfdcd8 100%);
+    radial-gradient(ellipse at 50% 0%, rgba(34, 85, 208, 0.05), transparent 30rem),
+    linear-gradient(180deg, #E0E8FF 0%, #D4DFFF 100%);
 }
 
 .footer::before {
   content: '';
   position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, var(--sdif-teal-bright), #3663ff, transparent);
-  opacity: 0.75;
-}
-
-.footer__links {
-  margin-bottom: 2.5rem;
-}
-
-.footer__col {
-  padding: 0 1.25rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #5B8FFF 30%, #3D72F5 50%, #2255D0 70%, transparent);
+  opacity: 0.7;
 }
 
 .footer__title {
   font-family: var(--sdif-font-display);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--sdif-teal-bright);
-  opacity: 1;
+  color: var(--sdif-cobalt-bright);
   margin-bottom: 0.9rem;
 }
 
 [data-theme='light'] .footer__title {
-  color: #006b60;
+  color: var(--sdif-cobalt);
 }
 
 .footer__item {
@@ -184,50 +204,52 @@ pre code {
 }
 
 .footer__link-item {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: rgba(226, 232, 229, 0.82);
-  transition: color 0.15s, text-shadow 0.15s;
+  font-size: 0.9rem;
+  font-family: var(--sdif-font-display);
+  color: rgba(216, 228, 255, 0.7);
+  transition: color 0.15s;
 }
 
 .footer__link-item:hover {
-  color: var(--sdif-teal-bright);
-  text-shadow: 0 0 16px rgba(0, 212, 184, 0.22);
+  color: var(--sdif-cobalt-bright);
   text-decoration: none;
 }
 
 [data-theme='light'] .footer__link-item {
-  color: #243a36;
+  color: #2A3A5C;
 }
 
 [data-theme='light'] .footer__link-item:hover {
-  color: #006b60;
+  color: var(--sdif-cobalt);
 }
 
 .footer__copyright {
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 212, 184, 0.12);
+  border-top: 1px solid var(--sdif-cobalt-border);
   font-family: var(--sdif-font-display);
-  font-size: 0.78rem;
-  color: rgba(226, 232, 229, 0.58);
+  font-size: 0.77rem;
+  color: rgba(216, 228, 255, 0.4);
 }
 
 [data-theme='light'] .footer__copyright {
-  border-top-color: rgba(0, 107, 96, 0.14);
-  color: #49625d;
+  border-top-color: rgba(34, 85, 208, 0.12);
+  color: #5A6A8A;
 }
 
 /* ------------------------------------------------------------
-   Doc pages — refined typography
+   Doc pages
    ------------------------------------------------------------ */
 .markdown h1,
 .markdown h2,
-.markdown h3 {
+.markdown h3,
+.markdown h4 {
   font-family: var(--sdif-font-display);
 }
 
 .markdown h1 {
   font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   border-bottom: 1px solid var(--sdif-border);
   padding-bottom: 0.6rem;
   margin-bottom: 1.5rem;
@@ -235,27 +257,103 @@ pre code {
 
 .markdown h2 {
   font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   margin-top: 2.5rem;
-  color: var(--sdif-teal);
+  color: var(--sdif-cobalt);
+}
+
+.markdown h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--sdif-bluegrey);
 }
 
 [data-theme='dark'] .markdown h2 {
-  color: var(--sdif-teal);
+  color: var(--sdif-cobalt-bright);
 }
 
-/* Table of contents */
+[data-theme='dark'] .markdown h3 {
+  color: var(--sdif-cobalt-light);
+}
+
 .table-of-contents__link {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
+  font-family: var(--sdif-font-display);
 }
 
-/* Inline code in prose */
+.table-of-contents__link--active {
+  color: var(--sdif-cobalt);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .table-of-contents__link--active {
+  color: var(--sdif-cobalt-bright);
+}
+
 .markdown code {
   background: var(--sdif-surface);
   border: 1px solid var(--sdif-border);
 }
 
 [data-theme='dark'] .markdown code {
-  background: #0d1117;
-  border-color: rgba(0, 212, 184, 0.1);
-  color: var(--sdif-teal-bright);
+  background: #0F1E38;
+  border-color: rgba(91, 143, 255, 0.15);
+  color: var(--sdif-cobalt-light);
+}
+
+.markdown a {
+  color: var(--sdif-cobalt);
+  text-decoration: none;
+  border-bottom: 1px solid var(--sdif-cobalt-border);
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.markdown a:hover {
+  color: var(--sdif-cobalt-bright);
+  border-bottom-color: var(--sdif-cobalt);
+  text-decoration: none;
+}
+
+[data-theme='dark'] .markdown a {
+  color: var(--sdif-cobalt-bright);
+  border-bottom-color: rgba(91, 143, 255, 0.25);
+}
+
+[data-theme='dark'] .markdown a:hover {
+  color: var(--sdif-cobalt-light);
+  border-bottom-color: var(--sdif-cobalt-bright);
+}
+
+/* Pagination */
+.pagination-nav__sublabel {
+  font-family: var(--sdif-font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sdif-cobalt);
+}
+
+[data-theme='dark'] .pagination-nav__sublabel {
+  color: var(--sdif-cobalt-bright);
+}
+
+.pagination-nav__link {
+  border-color: var(--sdif-border);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.pagination-nav__link:hover {
+  border-color: var(--sdif-cobalt-border);
+  box-shadow: 0 0 0 1px var(--sdif-cobalt-border);
+}
+
+/* Breadcrumb */
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--sdif-cobalt);
+}
+
+/* Admonitions */
+.alert--info {
+  border-left-color: var(--sdif-cobalt);
 }

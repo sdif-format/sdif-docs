@@ -12,6 +12,7 @@ const config: Config = {
   projectName: 'sdif-docs',
   onBrokenLinks: 'throw',
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
@@ -20,6 +21,20 @@ const config: Config = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+  themes: [
+    '@docusaurus/theme-mermaid',
+    [
+      '@easyops-cn/docusaurus-search-local',
+      {
+        hashed: true,
+        language: ['en'],
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        docsRouteBasePath: '/docs',
+      },
+    ],
+  ],
+
   presets: [
     [
       'classic',
@@ -85,12 +100,34 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `© ${new Date().getFullYear()} SDIF Authors. Built with Docusaurus.`,
+      copyright: `© ${new Date().getFullYear()} Alessandro Barbagallo. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['bash', 'json', 'yaml'],
+      additionalLanguages: ['bash', 'json', 'yaml', 'python'],
+    },
+    mermaid: {
+      theme: {light: 'base', dark: 'dark'},
+      options: {
+        themeVariables: {
+          darkMode: true,
+          primaryColor: '#3D72F5',
+          primaryTextColor: '#D8E4FF',
+          primaryBorderColor: '#2255D0',
+          lineColor: '#7B8FA8',
+          secondaryColor: '#0B1628',
+          tertiaryColor: '#0F1E38',
+          background: '#07101C',
+          mainBkg: '#0B1628',
+          nodeBorder: '#5B8FFF',
+          clusterBkg: '#0F1E38',
+          titleColor: '#5B8FFF',
+          edgeLabelBackground: '#0B1628',
+          attributeBackgroundColorEven: '#0F1E38',
+          attributeBackgroundColorOdd: '#0B1628',
+        },
+      },
     },
   } satisfies Preset.ThemeConfig,
 };

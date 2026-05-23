@@ -2,6 +2,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
+import { useColorMode } from '@docusaurus/theme-common';
 import Layout from '@theme/Layout';
 import styles from './index.module.css';
 
@@ -71,13 +72,21 @@ function TerminalWindow({ filename, children }: TerminalWindowProps): React.JSX.
 // ---------------------------------------------------------------------------
 
 function HeroSection(): React.JSX.Element {
-  const wordmarkSrc = useBaseUrl('/img/sdif-wordmark-dark.png');
+  const { colorMode } = useColorMode();
+  const wordmarkDark = useBaseUrl('/img/sdif-wordmark-dark.png');
+  const wordmarkLight = useBaseUrl('/img/sdif-logo.png');
+  const wordmarkSrc = colorMode === 'dark' ? wordmarkDark : wordmarkLight;
   const llmsTxt = useBaseUrl('/llms.txt');
   const llmsFullTxt = useBaseUrl('/llms-full.txt');
 
   return (
     <section className={styles.hero}>
+      <div className={styles.heroAura} aria-hidden="true" />
+      <div className={styles.heroScan} aria-hidden="true" />
+
       <div className={styles.heroInner}>
+        <div className={styles.heroFrame} aria-hidden="true" />
+
         <div className={styles.heroLogoWrap}>
           <img
             className={styles.heroWordmark}
@@ -95,13 +104,13 @@ function HeroSection(): React.JSX.Element {
         </p>
         <div className={styles.heroButtons}>
           <Link className={styles.heroBtnPrimary} to="/docs/getting-started">
-            get started
+            Get Started
           </Link>
           <Link className={styles.heroBtnSecondary} to="/docs/spec/">
-            read the spec
+            Read the Spec
           </Link>
           <Link className={styles.heroBtnSecondary} to="/docs/benchmarks/">
-            benchmarks
+            Benchmarks
           </Link>
           <a
             className={styles.heroBtnGhost}
@@ -109,7 +118,7 @@ function HeroSection(): React.JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
           >
-            github ↗
+            GitHub ↗
           </a>
         </div>
 

@@ -101,6 +101,27 @@ sdif_hash(source) == sdif_hash(sdif_from_ai(ai_view(source)))
 
 If this equality does not hold, the AI projection is lossy and must not be used.
 
+:::note[Unreleased — available in next release]
+**`expand_ai_doc()` for semantic equivalence without canonicalization.** `sdif_from_ai()` expands aliases and then calls `canonicalize()`, which reorders rules, sorts relations, and applies formatting rules. For callers that need semantic equivalence (not canonical form) — for example, round-trip fidelity checks that compare value-by-value rather than hash-by-hash — use `expand_ai_doc()` instead. It expands aliases and returns the expanded `Document` without calling `canonicalize()`, preserving statement order and field structure.
+
+```python
+from sdif.ai import expand_ai_doc, sdif_from_ai
+from sdif import parse_text
+from sdif.json import document_to_json_data
+
+# For JSON round-trip: expand without canonicalize
+doc = expand_ai_doc(parse_text(ai_text))
+data = document_to_json_data(doc)
+
+# For hash comparison: expand and canonicalize
+canonical_sdif = sdif_from_ai(ai_text)
+```
+:::
+
+:::note[Unreleased — fixed in next release]
+**`$`-column round-trip through expansion.** After `expand_ai_doc()` strips the `$` suffix from column names, the JSON decoder now correctly reads those cells as strings, not typed values. Previously, a column marked `status$` in the AI projection would have `$` stripped by expansion, and the decoder would coerce `"200"` to the integer `200`. This is fixed; any column index recorded in `Table.quoted_columns` is now treated as string-valued throughout the decode path.
+:::
+
 ## What AI Projection Does Not Do
 
 - It does not invent new information.

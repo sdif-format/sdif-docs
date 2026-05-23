@@ -7,7 +7,7 @@ const config: Config = {
   tagline: 'Compact, semantic, canonicalizable data for AI agents and deterministic machine workflows.',
   favicon: 'img/sdif-symbol-logo.png',
   url: 'https://sdif-format.github.io',
-  baseUrl: '/sdif-docs/',
+  baseUrl: '/',
   organizationName: 'sdif-format',
   projectName: 'sdif-docs',
   onBrokenLinks: 'throw',

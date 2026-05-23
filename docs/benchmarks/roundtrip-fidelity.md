@@ -33,6 +33,10 @@ The AI projection (`sdif ai`) produces a compacted representation intended for m
 
 A correct SDIF AI round-trip satisfies: `sdif_hash(source) == sdif_hash(from_ai(ai(source)))`. This is the same hash-equality test as the JSON round-trip, applied to a different conversion path.
 
+:::note[Unreleased — benchmark results after next release]
+**SDIF AI reaches 100% round-trip fidelity** across all 20 benchmark documents after two fixes: the `$`-column decoder now honours `Table.quoted_columns` when expanding AI projections, and the canonicalizer no longer re-quotes list literals. Canonical SDIF also remains at 100%. The benchmark evidence is updated in `sdif-benchmarks`.
+:::
+
 ## Known edge cases
 
 Several structural differences between SDIF and JSON create conditions where naive conversion can fail.
@@ -42,6 +46,8 @@ Several structural differences between SDIF and JSON create conditions where nai
 **Null cell handling.** SDIF tables distinguish between an absent value and an explicit null. JSON also has `null`, but JSON objects may simply omit a key, which is not the same as an explicit null. Round-trip converters must apply consistent rules for this distinction.
 
 **Triple-quoted narrative blocks.** SDIF supports multi-line narrative fields delimited with triple-quoted syntax. JSON strings use escape sequences for newlines. A round-trip that converts through JSON must correctly encode and decode newlines, carriage returns, and any characters that JSON requires to be escaped.
+
+**Scalar ambiguity in `$`-suffixed columns.** In SDIF AI projections, a `$` suffix on a column name signals that all cells in that column are strings, even if their content looks like a typed literal (integers, booleans, `null`). After alias expansion strips the `$` suffix, a decoder that does not consult `Table.quoted_columns` will coerce `"200"` to the integer `200`, breaking the round-trip. Correct decoders must propagate `quoted_columns` through the expansion step. *(Fixed in the next release of the reference implementation.)*
 
 ## How the benchmarks test fidelity
 

@@ -7,7 +7,9 @@ sidebar_position: 8
 
 This page defines the normative **`canonical-syntax-v1`** contract for SDIF 1.0.
 
-Canonicalization is the process of transforming a parsed SDIF document into a **deterministic, byte-for-byte reproducible** representation. Two documents that are semantically equivalent MUST produce identical canonical bytes and therefore identical hashes.
+Canonicalization is the process of transforming a parsed SDIF document into a **deterministic, byte-for-byte reproducible** representation. Two documents that parse to the same SDIF AST under the same schema-aware canonicalization policy MUST produce identical canonical bytes and therefore identical hashes.
+
+`canonical-syntax-v1` is syntax-level and structure-level. It does not perform semantic normalization of numerically or temporally equivalent values — for example, `1` and `1.0` produce different canonical bytes even if they represent the same quantity. See [Non-Goals for v1](#non-goals-for-v1) for the full list.
 
 ## Pipeline
 

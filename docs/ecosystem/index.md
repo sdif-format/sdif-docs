@@ -15,7 +15,7 @@ The SDIF ecosystem consists of official repositories maintained under the [sdif-
 
 The reference Python implementation. Provides the parser, CLI, canonicalizer, schema validator, JSON conversion, and AI projection. This is the primary package.
 
-Install: `pip install sdif`
+Install: `pip install sdif-format`
 
 [Details](./sdif-core) · [GitHub](https://github.com/sdif-format/sdif)
 

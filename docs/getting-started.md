@@ -12,7 +12,7 @@ This guide walks you through installing SDIF, writing your first document, and u
 SDIF is distributed as a Python package. Python 3.9 or later is required.
 
 ```bash
-pip install sdif
+pip install sdif-format
 ```
 
 ## Verify
@@ -30,20 +30,21 @@ You should see a list of available subcommands. If the command is not found, ens
 Create a file called `examples/plan.sdif`:
 
 ```sdif
-@sdif kind=Plan version=1.0
-title: "Q3 Delivery Plan"
-owner: "eng-team"
+@sdif 1.0
+kind Plan
+title "Q3 Delivery Plan"
+owner eng-team
 
-table milestones
-  id	name	due	status
+milestones[id,name,due,status]:
   m1	"Parser v1"	2024-07-01	done
   m2	"Canonical form"	2024-08-01	done
   m3	"Schema validation"	2024-09-01	in-progress
 
-rel: m3 blocks m2
+rel:
+  m3 blocks m2
 ```
 
-Note: column values in the `table` block are separated by literal tab characters (`\t`).
+Note: column values in table rows are separated by literal tab characters (U+0009). The column names appear once in the table header (`milestones[id,name,due,status]:`), not repeated per row.
 
 ## Parse it
 
@@ -54,10 +55,10 @@ sdif parse examples/plan.sdif
 Expected output:
 
 ```
-directives=2 statements=6
+directives=1 statements=6
 ```
 
-The parser reports two directives (`@sdif` and `table milestones`) and six statements (the three key-value fields, one header row, two data rows, and the relation triple).
+The parser reports one version directive (`@sdif 1.0`), and six statements: the kind declaration, two scalar fields, one table header with three data rows, and one relation triple.
 
 ## Canonicalize
 

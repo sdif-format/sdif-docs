@@ -13,10 +13,10 @@ sidebar_position: 1
 ## Install from PyPI
 
 ```bash
-pip install sdif
+pip install sdif-format
 ```
 
-This installs the `sdif` CLI and the `sdif` Python library.
+This installs the `sdif` CLI and the `sdif` Python library. The PyPI package is named `sdif-format` to avoid a name collision with an unrelated package; the CLI command and import name remain `sdif`.
 
 ## Editable install from source
 
@@ -42,7 +42,7 @@ If `sdif` is not found after installation, your Python environment's `bin` direc
 
 ```bash
 # Check where pip installs scripts
-python -m pip show -f sdif | grep Location
+python -m pip show -f sdif-format | grep Location
 
 # Add user bin to PATH (if using --user install)
 export PATH="$HOME/.local/bin:$PATH"

@@ -45,7 +45,7 @@ SDIF has a native syntax for directed triples in `rel:` blocks. JSON has no equi
 
 SDIF has a normative canonical form. The `sdif canon` command produces a deterministic byte representation of any SDIF document. The `sdif hash` command computes a SHA-256 over that canonical form. Two semantically equivalent SDIF documents have the same hash.
 
-Standard JSON has no canonical form. Two JSON documents that represent the same data may differ in key ordering, whitespace, number formatting, or unicode escaping. There is no standard mechanism to hash a JSON document in a way that two semantically equivalent documents would produce the same hash.
+The base JSON format does not mandate a canonical representation. Two JSON documents that represent the same data may differ in key ordering, whitespace, number formatting, or unicode escaping. Optional profiles such as [RFC 8785 JSON Canonicalization Scheme (JCS)](https://www.rfc-editor.org/rfc/rfc8785) define canonical JSON for cryptographic workflows, but canonicalization is not part of everyday JSON interchange and requires explicit adoption of a separate specification. In SDIF, canonicalization is a core format contract — it is defined by the format itself and enforced by the reference toolchain.
 
 This difference matters for data integrity checks, caching, deduplication, and any workflow where you need to verify that two documents carry the same data.
 

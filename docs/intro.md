@@ -42,20 +42,21 @@ The source profile is what humans write. The canonical profile is what machines 
 Here is a minimal SDIF document describing a project plan:
 
 ```sdif
-@sdif kind=Plan version=1.0
-title: "Q3 Delivery Plan"
-owner: "eng-team"
+@sdif 1.0
+kind Plan
+title "Q3 Delivery Plan"
+owner eng-team
 
-table milestones
-  id	name	due	status
+milestones[id,name,due,status]:
   m1	"Parser v1"	2024-07-01	done
   m2	"Canonical form"	2024-08-01	done
   m3	"Schema validation"	2024-09-01	in-progress
 
-rel: m3 blocks m2
+rel:
+  m3 blocks m2
 ```
 
-This document has two directives (`@sdif` and `table milestones`) and six statements (three key-value fields, one table body with two data rows, and one triple). The table header defines columns once; each row inherits those column names.
+This document has a version header (`@sdif 1.0`), a kind declaration (`kind Plan`), two scalar fields, one table with three rows, and one relation triple. The table column header (`milestones[id,name,due,status]:`) is declared once; each indented row provides tab-separated values in that column order.
 
 ## Where to go next
 

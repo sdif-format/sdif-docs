@@ -9,7 +9,9 @@ The `sdif` package is the reference Python implementation of SDIF. It provides e
 
 **GitHub:** [https://github.com/sdif-format/sdif](https://github.com/sdif-format/sdif)
 
-**Install:** `pip install sdif`
+**Install:** `pip install sdif-format`
+
+The PyPI package is named `sdif-format` to avoid a name collision with an unrelated package. The CLI command and Python import name remain `sdif`.
 
 ## Components
 

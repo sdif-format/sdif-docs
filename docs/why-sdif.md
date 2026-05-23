@@ -32,7 +32,7 @@ CSV is compact for tabular data, but it carries no type information, no nested s
 
 ### TOON is excellent for compact JSON-shaped data; SDIF targets a broader semantic and canonical layer
 
-TOON (Terse Object Notation) is an efficient format for JSON-shaped data without key repetition. SDIF shares that goal for tabular data but adds semantic relations, a versioned canonical form, schema validation, and AI projections. If your data is purely JSON-shaped and you do not need those features, TOON may be the right choice.
+TOON (Token-Oriented Object Notation) is an efficient format for JSON-shaped data without key repetition. SDIF shares that goal for tabular data but adds semantic relations, a versioned canonical form, schema validation, and AI projections. If your data is purely JSON-shaped and you do not need those features, TOON may be the right choice.
 
 ## What SDIF optimizes for
 

@@ -42,7 +42,8 @@ priority  high
 A **quoted value** is enclosed in double-quote characters (`"`, U+0022) on the same line as the key.
 
 - A quoted string begins with `"` and ends with the next unescaped `"` on the same line.
-- Parsers MUST report an error if EOF or LF is reached before the closing `"`.
+- Parsers MUST report `SDIF_STRING_UNCLOSED` if EOF or LF is reached before the closing `"`. A quoted scalar MUST be terminated on the same logical line as it opens.
+- No non-whitespace, non-comment content MAY appear on the same line after the closing `"`. Parsers MUST report `SDIF_STRING_TRAILING` if trailing content is detected after the closing quote.
 - The following escape sequences are recognized inside quoted strings:
 
   | Sequence | Meaning |

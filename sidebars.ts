@@ -104,6 +104,7 @@ const sidebars: SidebarsConfig = {
         'contributing/release-process',
       ],
     },
+    'changelog',
   ],
 };
 

@@ -25,7 +25,8 @@ CLI commands:
 - sdif validate <path> --schema <path>
 - sdif fmt <path> [--check]
 
-Install: pip install sdif
+Install: pip install sdif-format
+(Package name on PyPI is sdif-format. CLI command and Python import are both sdif.)
 
 Primary docs:
 - /docs/getting-started

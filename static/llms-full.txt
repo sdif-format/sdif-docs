@@ -6,7 +6,8 @@ workflows. It supports tables, relations, schemas, and rules. It has a canonical
 form and a stable hash. It has a compact AI projection with full round-trip
 fidelity.
 
-Install: pip install sdif
+Install: pip install sdif-format
+(Package name on PyPI is sdif-format. CLI command and Python import are both sdif.)
 GitHub org: https://github.com/sdif-format
 
 ---
@@ -34,24 +35,26 @@ Recognized kinds include: Plan, Registry, Schema, Report, and user-defined kinds
 
 ### Tables
 
-Tables use a header row followed by data rows. Columns are separated by a
-literal horizontal tab character (U+0009, HTAB). Do not substitute spaces.
+Tables declare column names inline in the header, followed by indented data rows.
+Columns are separated by a literal horizontal tab character (U+0009, HTAB). Do not
+substitute spaces.
 
-  table tasks
-  id	title	status
-  1	Design schema	done
-  2	Write parser	done
-  3	Publish docs	in-progress
+  tasks[id,title,status]:
+    1	"Design schema"	done
+    2	"Write parser"	done
+    3	"Publish docs"	in-progress
 
-The first non-blank line after `table <name>` is the header. Each subsequent
-non-blank line is a row. Blank lines end the table block.
+The table header is `name[col1,col2,...]:`. Each indented row provides values in
+that column order, separated by HTAB. Blank lines end the table block.
 
 ### Relations
 
-Relations express typed triples: subject, predicate, object.
+Relations express typed triples: subject, predicate, object. They are grouped
+under a `rel:` block, with each triple on its own indented line.
 
-  rel: tasks#1 blocks tasks#3
-  rel: tasks#2 depends-on tasks#1
+  rel:
+    tasks#1 blocks tasks#3
+    tasks#2 depends-on tasks#1
 
 A relation links two entities by a named predicate. The subject and object
 use the form `<table>#<id>` or a bare identifier.
@@ -193,37 +196,35 @@ All commands operate on .sdif source files unless noted.
   @sdif 1.0
   kind Plan
 
-  table milestones
-  id	name	target
-  1	Alpha	2025-Q1
-  2	Beta	2025-Q2
-  3	GA	2025-Q3
+  milestones[id,name,target]:
+    1	Alpha	2025-Q1
+    2	Beta	2025-Q2
+    3	GA	2025-Q3
 
-  rel: milestones#1 precedes milestones#2
-  rel: milestones#2 precedes milestones#3
+  rel:
+    milestones#1 precedes milestones#2
+    milestones#2 precedes milestones#3
 
 ### Registry Document
 
   @sdif 1.0
   kind Registry
 
-  table packages
-  id	name	version	stable
-  1	sdif	1.0.0	true
-  2	sdif-benchmarks	0.1.0	true
-  3	tree-sitter-sdif	0.1.0	true
+  packages[id,name,version,stable]:
+    1	sdif-format	1.0.0	true
+    2	sdif-benchmarks	0.1.0	true
+    3	tree-sitter-sdif	0.1.0	true
 
 ### Schema Document
 
   @sdif 1.0
   kind Schema
 
-  table packages-schema
-  field	type	required
-  id	integer	true
-  name	string	true
-  version	string	true
-  stable	boolean	false
+  packages-schema[field,type,required]:
+    id	integer	true
+    name	string	true
+    version	string	true
+    stable	boolean	false
 
 ---
 

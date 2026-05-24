@@ -10,28 +10,32 @@ The benchmark suite is available in the [sdif-benchmarks](https://github.com/sdi
 ## Run the Default Suite
 
 ```bash
+git clone https://github.com/sdif-format/sdif.git
 git clone https://github.com/sdif-format/sdif-benchmarks.git
 cd sdif-benchmarks
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .
-python benchmarks/run.py
+SDIF_CORE_REPO=../sdif python3 scripts/run_suite.py
 ```
 
-Results are written to the `output/` directory as `summary.md`, `summary.json`, `summary.sdif`, and `summary.sdif.ai`.
+By default, the benchmark repo expects the core SDIF repo at `../sdif`; set `SDIF_CORE_REPO` if it lives elsewhere. Results are written to `results/<track>/` plus a unified suite index at `results/index.json`, `results/index.sdif`, `results/index.sdif.ai`, `results/README.md`, and `results/dashboard.html`.
 
 ## Use Your Own Corpus
 
-Place your `.sdif` documents in the `corpus/` directory before running. The benchmark script reads all `.sdif` files it finds there and converts each to every target format before measuring.
+Point the suite at a golden-fixture directory with the same shape used by the core repo: `examples/golden/<name>/equivalent.json` plus `source.sdif` and, where applicable, canonical evidence files.
 
 ```bash
-cp your-documents/*.sdif corpus/
-python benchmarks/run.py
+SDIF_BENCHMARK_GOLDEN_DIR=/path/to/examples/golden \
+SDIF_CORE_REPO=../sdif \
+python3 scripts/run_suite.py
 ```
 
 ## Notes
 
-- The benchmark runner requires Python 3.9 or later.
-- Token count measurement requires the `tiktoken` package, which is installed as part of `pip install -e .`.
-- TOON format comparison requires the optional `toon` package. If it is not installed, TOON columns are omitted from results rather than causing an error.
+- The benchmark runner requires Python 3.10 or later.
+- Token count measurement requires the tokenizer packages installed with the benchmark repo; optional tokenizer integrations can be disabled with environment variables.
+- TOON format comparison is optional; set `SDIF_BENCHMARK_TOON=0` to disable it.
+- Retrieval accuracy is opt-in: set `SDIF_BENCHMARK_RETRIEVAL=1` and provide the required model API key.
+- You can run individual tracks with `--only token`, `--only context`, `--only roundtrip`, `--only delta`, `--only semantic`, `--only ops`, or `--only retrieval`.
 - Results reflect the tokenizer and corpus in use at the time of the run. Compare runs only when both are held constant.

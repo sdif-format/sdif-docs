@@ -20,6 +20,13 @@ Changes in this section are merged to `main` but not yet included in a tagged re
 ### Benchmark
 
 - SDIF AI round-trip fidelity reaches **100% across all 20 benchmark documents** after the above fixes. Canonical SDIF also remains at 100%.
+- **Benchmark suite index now includes semantic fidelity and operability.** The suite runner reads both tracks into the unified `results/index.*` artifacts instead of leaving them as standalone reports.
+- **Operability now emits suite-compatible artifacts.** The operability track writes `summary.md`, `summary.json`, `summary.sdif`, `summary.sdif.ai`, viewer HTML, and `dashboard.html` under `results/operability/`.
+- **Semantic golden fixtures now include canonical evidence.** Generated semantic fixtures write `canonical.sdif` and `canonical.sha256` alongside `source.sdif` and `equivalent.json`, keeping the benchmark corpus aligned with core canonical-fixture checks.
+
+### CLI
+
+- **`sdif validate --schema <missing-file>` now exits as an operational error.** Missing or unreadable schema files return exit code `2` with a concise error message instead of surfacing a traceback.
 
 ---
 

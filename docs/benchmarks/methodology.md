@@ -9,14 +9,15 @@ This page describes how benchmarks are constructed, what is measured, and where 
 
 ## Corpus
 
-Benchmarks run against a set of SDIF example documents:
+Benchmarks run against the canonical golden fixtures in the core `sdif` repository (`examples/golden/`). The corpus includes small, medium, and large documents plus semantic fixtures such as:
 
-- `plan` — a project plan document using tables and relations
-- `registry` — a multi-table registry with typed fields
-- `schema` — a `kind Schema` document with field and type definitions
-- `validation-report` — a validation result document with structured diagnostics
+- `plan` — a project plan document using tables and relations.
+- `registry` — a multi-table registry with typed fields.
+- `schema` — a `kind Schema` document with field and type definitions.
+- `validation-report` — a validation result document with structured diagnostics.
+- `semantic-narrative`, `audit-provenance`, `agent-workflow`, and `llm-api-response` — generated semantic fixtures with relations, rules, nested structures, and canonical hash evidence.
 
-All source documents are `.sdif` files. Each is converted to every target format for comparison.
+Each fixture contains `equivalent.json`, `source.sdif`, `canonical.sdif`, and `canonical.sha256` when canonical evidence is available. The benchmark repository reads this shared corpus by default from `../sdif/examples/golden/`, or from `SDIF_BENCHMARK_GOLDEN_DIR`.
 
 ## Formats Compared
 
@@ -29,6 +30,7 @@ All source documents are `.sdif` files. Each is converted to every target format
 | YAML | Default `yaml.dump()` output |
 | XML | Standard element-per-field serialization |
 | TOON | TOON format output |
+| CSV Bundle | Directory-style CSV projection for table-heavy data |
 
 ## Metrics
 
@@ -50,6 +52,14 @@ Tokens per semantic fact. A semantic fact is one of:
 - A named relation triple
 
 Lower is better. A format with fewer tokens per fact leaves more model capacity for reasoning rather than parsing overhead.
+
+### Semantic Fidelity
+
+Structural recovery after format conversion. The semantic-fidelity track measures four axes independently: relation triples, rule declarations, table row objects, and scalar fields. If an axis is not present in the source or cannot be parsed for a format, it is reported as not measured rather than as a zero score.
+
+### Operability
+
+Static capability matrix for deterministic workflows. The operability track records whether each format has a standard canonical form, built-in canonicalization in this implementation, stable hashing, schema validation, native relation support, rule declaration support, rule evaluation support, a semantic type vocabulary, and deterministic output.
 
 ### Round-Trip Fidelity
 
@@ -83,7 +93,7 @@ Serialization is applied consistently to avoid format-specific advantages from w
 
 ## Limitations
 
-- **Corpus is small.** Four example documents do not cover all real-world document shapes. Results may not generalize.
+- **Corpus is finite.** The golden fixtures cover several document shapes but do not represent every production workload. Results may not generalize.
 - **Semantic projection is approximate.** JSON, YAML, and XML lack SDIF's relation and schema constructs. Cross-format conversions are best-effort.
 - **Tokenizer coverage is partial.** Results reflect `cl100k_base`. Other model families may have different token boundaries.
 - **No semantic normalization.** SDIF v1 canonicalization is syntax-level only. Numeric or date equivalences are not normalized and may inflate semantic density counts.

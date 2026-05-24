@@ -34,7 +34,14 @@ The AI projection (`sdif ai`) produces a compacted representation intended for m
 A correct SDIF AI round-trip satisfies: `sdif_hash(source) == sdif_hash(from_ai(ai(source)))`. This is the same hash-equality test as the JSON round-trip, applied to a different conversion path.
 
 :::note[Unreleased — benchmark results after next release]
-**SDIF AI reaches 100% round-trip fidelity** across all 20 benchmark documents after two fixes: the `$`-column decoder now honours `Table.quoted_columns` when expanding AI projections, and the canonicalizer no longer re-quotes list literals. Canonical SDIF also remains at 100%. The benchmark evidence is updated in `sdif-benchmarks`.
+**SDIF AI reaches 100% round-trip fidelity** across all 20 benchmark documents after:
+
+1. The `$`-column decoder now honours `Table.quoted_columns` when expanding AI projections.
+2. The canonicalizer no longer re-quotes list literals.
+3. The benchmark's relation round-trip comparison recursively normalizes relation lists by sorting them deterministically while preserving duplicates. This makes comparison order-insensitive without masking duplicate count mismatches.
+4. Projection aliases (`aliases.py`) now apply anti-collision rules, filtering the `@sdif.ai` headers to only include canonical keys present in the document and dropping any alias mapping that collides with an existing literal key (preventing issues like eager `auth` to `authority` expansion).
+
+Canonical SDIF also remains at 100%. The benchmark evidence is updated in `sdif-benchmarks`.
 :::
 
 ## Known edge cases

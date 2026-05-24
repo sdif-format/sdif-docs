@@ -139,7 +139,7 @@ The following types are defined for use in `type` columns of `fields`, `columns`
 |---|---|
 | `Identifier` | A dot-separated alphanumeric token conforming to the identifier grammar in [Lexical Structure](./lexical-structure.md#identifiers) |
 | `String` | Arbitrary UTF-8 text, optionally enclosed in double quotes |
-| `Path` | A filesystem path value. Treated as an opaque string by the validator; see [Security](./security.md#path-values) for handling guidance |
+| `Path` | A filesystem path value. Treated as an opaque string by the validator; see [Security](./security.md#no-external-references) for handling guidance |
 | `Enum(v1,v2,...)` | A closed set of string literals. The value MUST be one of the listed alternatives. Alternatives are separated by commas with no surrounding whitespace inside the parentheses |
 
 Types not listed in this table are not defined in SDIF 1.0. Implementations MUST report a schema error when an unrecognized type appears in a schema document. Additional types MAY be defined in future specification versions.

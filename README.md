@@ -1,6 +1,6 @@
 # sdif-docs
 
-Documentation website for [SDIF (Semantic Data Interchange Format)](https://github.com/sdif-format/sdif).
+Documentation website for [SDIF (Semantic Data Interchange Format)](https://github.com/sdif-format/sdif-spec).
 
 Built with [Docusaurus 3](https://docusaurus.io/). Deployed to [sdif-format.github.io/sdif-docs](https://sdif-format.github.io/sdif-docs/).
 
@@ -29,4 +29,4 @@ Pushed to `main` triggers the GitHub Actions workflow that builds and deploys to
 
 ## License
 
-See the [sdif](https://github.com/sdif-format/sdif) repository for license information.
+See the [sdif-spec](https://github.com/sdif-format/sdif-spec) repository for license information.

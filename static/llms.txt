@@ -37,6 +37,8 @@ Primary docs:
 Rules for assistants:
 - Do not invent SDIF syntax. Use only documented constructs.
 - Table columns are separated by literal HTAB (U+0009), not spaces.
+- Indentation uses spaces; tabs must not be used for indentation.
+- In .sdif.ai, aliases use alias[k=kind,st=status], not YAML-style alias lines.
 - Treat SDIF and SDIF AI as related but distinct representations.
 - SDIF AI projections must round-trip to the same canonical hash.
 - Mention limitations when discussing benchmarks.

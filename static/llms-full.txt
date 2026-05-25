@@ -61,11 +61,13 @@ use the form `<table>#<id>` or a bare identifier.
 
 ### Rules
 
-Rules express declarative constraints. They are not executable code.
+Rules express declarative constraints. They are not executable code. In v1.0,
+rules are grouped under a `rules:` block and the parser preserves each rule row.
 
-  rule: if tasks.status == "in-progress" then tasks.owner must exist
+  rules:
+    (warn eq(tasks.status,blocked))
 
-Rules are v1 syntax and are parsed but not yet evaluated by the validator.
+Rules are parsed but not evaluated by the validator in v1.0.
 
 ### Comments
 
@@ -77,21 +79,25 @@ Lines beginning with `#` are comments and are stripped during parsing.
 
 ## AI Projection Syntax (.sdif.ai)
 
-AI projection files begin with the `@sdif.ai` header and include metadata.
+AI projection files begin with the `@sdif.ai` header and may include metadata
+as ordinary SDIF fields. Use spaces for indentation; reserve HTAB for table cells.
 
   @sdif.ai 1.0
-  source-hash: sha256:<hex>
-  lossless: true
+  sourceHash sha256:<hex>
+  lossless true
 
-Tables in AI projections may use shortened column aliases declared in the header:
+Tables in AI projections may use shortened column aliases declared with an
+`alias[...]` header:
 
-  aliases: id=i title=t status=s
+  alias[i=id,t=title,st=status]
 
-Rows follow the same HTAB-delimited format.
+Rows follow the same HTAB-delimited format and may be compact, without
+indentation, in `.sdif.ai` files.
 
 Relations in AI projections use grouped syntax (valid only in .sdif.ai files):
 
-  rel[tasks#1]: blocks tasks#3
+  rel[tasks#1]:
+    blocks tasks#3
 
 The `from-ai` command reverses the projection and reconstructs standard `rel:`
 triples in the output SDIF document.
@@ -134,12 +140,11 @@ A schema document has `kind Schema` and defines expected tables, fields, and typ
   @sdif 1.0
   kind Schema
 
-  table tasks-schema
-  field	type	required
-  id	integer	true
-  title	string	true
-  status	enum(done,in-progress,blocked)	false
-  owner	string	false
+  tasksSchema[field,type,required]:
+    id	integer	true
+    title	string	true
+    status	enum_done_in_progress_blocked	false
+    owner	string	false
 
 Pass a schema to validation and canonicalization commands with `--schema <path>`.
 The schema file must be a valid SDIF document with `kind Schema`. Do not pass a

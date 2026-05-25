@@ -16,10 +16,10 @@ git clone https://github.com/sdif-format/sdif-benchmarks
 cd sdif-benchmarks
 ```
 
-The suite expects the core SDIF repository to be present at `../sdif` by default. If you have it elsewhere, set `SDIF_CORE_REPO`:
+The suite expects the core SDIF repository to be present at `../sdif-py` by default. If you have it elsewhere, set `SDIF_CORE_REPO`:
 
 ```bash
-export SDIF_CORE_REPO=/path/to/sdif
+export SDIF_CORE_REPO=/path/to/sdif-py
 ```
 
 ---
@@ -36,7 +36,7 @@ This installs the benchmark runners and shared helpers. The `sdif` CLI must also
 
 ## 3. Add your own documents to the corpus
 
-The shared corpus lives in `../sdif/examples/golden/`. Each fixture is a directory containing:
+The shared corpus lives in `../sdif-py/examples/golden/`. Each fixture is a directory containing:
 
 - `equivalent.json` — the canonical semantic source (benchmark input)
 - `source.sdif` — the SDIF representation

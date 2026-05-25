@@ -17,7 +17,7 @@ Benchmarks run against the canonical golden fixtures in the core `sdif` reposito
 - `validation-report` — a validation result document with structured diagnostics.
 - `semantic-narrative`, `audit-provenance`, `agent-workflow`, and `llm-api-response` — generated semantic fixtures with relations, rules, nested structures, and canonical hash evidence.
 
-Each fixture contains `equivalent.json`, `source.sdif`, `canonical.sdif`, and `canonical.sha256` when canonical evidence is available. The benchmark repository reads this shared corpus by default from `../sdif/examples/golden/`, or from `SDIF_BENCHMARK_GOLDEN_DIR`.
+Each fixture contains `equivalent.json`, `source.sdif`, `canonical.sdif`, and `canonical.sha256` when canonical evidence is available. The benchmark repository reads this shared corpus by default from `../sdif-py/examples/golden/`, or from `SDIF_BENCHMARK_GOLDEN_DIR`.
 
 ## Formats Compared
 
